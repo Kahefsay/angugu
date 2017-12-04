@@ -5,17 +5,25 @@ import { AlertModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { PizzaformComponent } from './pizzaform/pizzaform.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { AccueilComponent } from './accueil/accueil.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PizzaformComponent
+    PizzaformComponent,
+    HeaderComponent,
+    FooterComponent,
+    AccueilComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
