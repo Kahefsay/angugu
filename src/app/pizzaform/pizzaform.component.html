@@ -45,11 +45,13 @@
           </div>
         </div>
         <p>Prix : {{pizza.calculerPrix() | currency: 'EUR'}}</p>
-        <button type="submit" class="btn btn-primary">Commander</button>
+        <a routerLink="/confirmation" type="submit" class="btn btn-primary" (click)="callPizzaService()">Commander</a>
       </form>
     </div>
 
   </div>
+
+  <p>{{pizza.ingredientToString()}}</p>
 
 </div>
 

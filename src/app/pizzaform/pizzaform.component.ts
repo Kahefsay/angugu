@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Base, Ingredient, Pate, Pizza} from '../pizza';
+import { PizzaServiceService } from '../pizza-service.service';
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-pizzaform',
@@ -7,6 +9,8 @@ import {Base, Ingredient, Pate, Pizza} from '../pizza';
   styleUrls: ['./pizzaform.component.css']
 })
 export class PizzaformComponent implements OnInit {
+  constructor(private pizzaServiceService:PizzaServiceService) { }
+  private isLoading: boolean;
   private pizza: Pizza;
 
   pates: Pate[] = [
@@ -26,9 +30,21 @@ export class PizzaformComponent implements OnInit {
     { nom: 'Magret', prix: 4, value: false}
   ];
 
-  constructor() { }
 
   ngOnInit() {
     this.pizza = new Pizza(this.ingredients, this.pates[0], this.bases[0]);
+    this.isLoading = false;
   }
+
+  public callPizzaService() {
+    this.isLoading = true;
+    this.pizzaServiceService.postPizza(this.pizza).subscribe(
+      (res) => { this.onSuccess(res)},
+      (error) => { this.onError(error)}
+    )
+  }
+
+
+  public onSuccess(Pizza: any) { this.isLoading = false; console.log('success');}
+  public onError(err:HttpErrorResponse) { this.isLoading = false; console.log(err);}
 }
