@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Base, Ingredient, Pate, Pizza} from '../pizza';
 import { PizzaServiceService } from '../pizza-service.service';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pizzaform',
@@ -9,7 +10,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./pizzaform.component.css']
 })
 export class PizzaformComponent implements OnInit {
-  constructor(private pizzaServiceService:PizzaServiceService) { }
+  constructor(private pizzaServiceService: PizzaServiceService, private router: Router) { }
   private isLoading: boolean;
   private pizza: Pizza;
 
@@ -39,12 +40,12 @@ export class PizzaformComponent implements OnInit {
   public callPizzaService() {
     this.isLoading = true;
     this.pizzaServiceService.postPizza(this.pizza).subscribe(
-      (res) => { this.onSuccess(res)},
-      (error) => { this.onError(error)}
-    )
+      (res) => { this.onSuccess(res); console.log(res); this.router.navigate(['./confirmation']); },
+      (error) => { this.onError(error); this.router.navigate(['./confirmation']); }
+    );
   }
 
 
-  public onSuccess(Pizza: any) { this.isLoading = false; console.log('success');}
-  public onError(err:HttpErrorResponse) { this.isLoading = false; console.log(err);}
+  public onSuccess(Pizza: any) { this.isLoading = false; console.log('success'); }
+  public onError(err: HttpErrorResponse) { this.isLoading = false; console.log(err); }
 }

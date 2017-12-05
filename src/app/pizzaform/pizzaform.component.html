@@ -1,6 +1,9 @@
 <app-header></app-header>
 
-<div class="container">
+<div class="spinner" *ngIf="isLoading">
+</div>
+
+<div class="container" *ngIf="!isLoading">
 
   <div class="row mt-5">
     <div class="col-md-6 offset-md-6">
@@ -45,13 +48,11 @@
           </div>
         </div>
         <p>Prix : {{pizza.calculerPrix() | currency: 'EUR'}}</p>
-        <a routerLink="/confirmation" type="submit" class="btn btn-primary" (click)="callPizzaService()">Commander</a>
+        <a type="submit" class="btn btn-primary" (click)="callPizzaService()">Commander</a>
       </form>
     </div>
 
   </div>
-
-  <p>{{pizza.ingredientToString()}}</p>
 
 </div>
 

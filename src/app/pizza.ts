@@ -19,12 +19,12 @@ export class Pizza {
     return this.prix += this.base.prix + this.pate.prix;
   }
 
-  ingredientToString(){
-    let values: string[] = [];
-    values[0] = this.ingredients[0].nom + '=' + this.ingredients[0].value.toString();
-    values[1] = this.ingredients[1].nom + '=' + this.ingredients[1].value.toString();
-    values[2] = this.ingredients[2].nom + '=' + this.ingredients[2].value.toString();
-    values[3] = this.ingredients[3].nom + '=' + this.ingredients[3].value.toString();
+  ingredientToString() {
+    const values: string[] = [];
+    values[0] = 'anchois' + '=' + this.ingredients[0].value.toString();
+    values[1] = 'miel' + '=' + this.ingredients[1].value.toString();
+    values[2] = 'jambon' + '=' + this.ingredients[2].value.toString();
+    values[3] = 'magret' + '=' + this.ingredients[3].value.toString();
     return values;
   }
 

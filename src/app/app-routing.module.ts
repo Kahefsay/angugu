@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', component: AccueilComponent},
   { path: 'composer', component: PizzaformComponent },
   { path: 'confirmation', component: RecapComponent }
-]
+];
 
 @NgModule({
   exports: [ RouterModule ],
