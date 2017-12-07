@@ -1,5 +1,20 @@
 <app-header></app-header>
-<p>
-  recap works!
-</p>
+
+<div class="container">
+
+  <div class="row mt-5">
+    <div class="col-md-9 offset-md-2">
+      <h2 *ngIf="!isOrdered">Un problème est survenu lors de la commande.</h2>
+      <h2 *ngIf="isOrdered">Votre commande a été prise en compte.</h2>
+      <div class="row mt-5">
+        <div class="col">
+            <a type="submit" class="btn btn-primary" routerLink="">Accueil</a>
+        </div>
+          
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <app-footer></app-footer>

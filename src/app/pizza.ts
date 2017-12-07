@@ -28,6 +28,17 @@ export class Pizza {
     return values;
   }
 
+  toString() {
+    let res: string = "";
+    res = this.pate.nom + ", " + this.base.nom;
+    
+    for (const ingredient of this.ingredients) {
+      if (ingredient.value) {res += ", " + ingredient.nom};
+    }
+   
+    return res;
+  }
+
 }
 
 export class Pate {

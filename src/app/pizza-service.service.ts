@@ -12,6 +12,10 @@ export class PizzaServiceService {
   constructor(private http: HttpClient) { }
   private urlGet = 'http://localhost:4300/pizzas';
   private urlPost = 'http://localhost:4300/commanderPizza?';
+  public commandeOk = false;
+
+  
+
 
   public getPizzas(): Observable<Pizza[]> {
     return this.http.get(this.urlGet).catch((err: any) => Observable.throw(err || 'Error'));

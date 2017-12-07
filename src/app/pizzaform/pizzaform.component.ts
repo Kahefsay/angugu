@@ -40,8 +40,12 @@ export class PizzaformComponent implements OnInit {
   public callPizzaService() {
     this.isLoading = true;
     this.pizzaServiceService.postPizza(this.pizza).subscribe(
-      (res) => { this.onSuccess(res); console.log(res); this.router.navigate(['./confirmation']); },
-      (error) => { this.onError(error); this.router.navigate(['./confirmation']); }
+      (res) => { this.onSuccess(res); if (typeof(window.localStorage) !== "undefined") {
+        window.localStorage.setItem('pizza', JSON.stringify(this.pizza));
+      }; this.pizzaServiceService.commandeOk = true; this.router.navigate(['./confirmation']);},
+      (error) => { this.onError(error);
+        if (typeof(window.localStorage) !== "undefined") {
+          window.localStorage.setItem('pizza', JSON.stringify(this.pizza))}; this.pizzaServiceService.commandeOk = false; this.router.navigate(['./confirmation']); }
     );
   }
 

@@ -9,7 +9,11 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./recap.component.css']
 })
 export class RecapComponent implements OnInit {
+  constructor(private pizzaServiceService: PizzaServiceService) { }
+
+  isOrdered: boolean;
 
   ngOnInit() {
+    this.isOrdered = this.pizzaServiceService.commandeOk;
   }
 }
