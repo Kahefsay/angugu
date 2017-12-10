@@ -17,7 +17,7 @@
           <label>Pate</label>
           <div>
             <label>
-              <select name="pate" [(ngModel)]="pizza.pate">
+              <select name="pate" [(ngModel)]="pizza.pate" required>
                 <option *ngFor="let pate of pates" [ngValue]="pate">
                   {{pate.nom}}
                 </option>
@@ -31,7 +31,7 @@
           <div>
             <div *ngFor="let base of bases" class="form-check form-check-inline">
               <label>
-                <input type="radio" name="base" [(ngModel)]="pizza.base" [value]="base">
+                <input type="radio" name="base" [(ngModel)]="pizza.base" [value]="base" required>
                 {{base.nom}} {{base.prix | currency: 'EUR'}}
               </label>
             </div>
@@ -51,7 +51,7 @@
           </div>
         </div>
         <p>Prix : {{pizza.calculerPrix() | currency: 'EUR'}}</p>
-        <a type="submit" class="btn btn-primary" (click)="callPizzaService()">Commander</a>
+        <button type="submit" class="btn btn-primary" [disabled]= "!isValidForm()" (click)="callPizzaService()">Commander</button>
       </form>
     </div>
 

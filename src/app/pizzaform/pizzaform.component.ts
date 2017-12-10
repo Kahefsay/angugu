@@ -13,6 +13,7 @@ export class PizzaformComponent implements OnInit {
   constructor(private pizzaServiceService: PizzaServiceService, private router: Router) { }
   private isLoading: boolean;
   private pizza: Pizza;
+  private isValid: boolean;
 
   pates: Pate[] = [
     { nom: 'Fine', prix: 4},
@@ -31,10 +32,17 @@ export class PizzaformComponent implements OnInit {
     { nom: 'Magret', prix: 4, value: false}
   ];
 
-
   ngOnInit() {
     this.pizza = new Pizza(this.ingredients, this.pates[0], this.bases[0]);
     this.isLoading = false;
+  }
+
+  isValidForm() {
+    this.isValid = false;
+    for (const ingredient of this.pizza.ingredients) {
+      if (ingredient.value) {this.isValid = true; }
+    }
+    return this.isValid;
   }
 
   public callPizzaService() {
@@ -44,7 +52,7 @@ export class PizzaformComponent implements OnInit {
         window.localStorage.setItem('pizza', JSON.stringify(this.pizza));
       }; this.pizzaServiceService.commandeOk = true; this.router.navigate(['./confirmation']);},
       (error) => { this.onError(error);
-        if (typeof(window.localStorage) !== "undefined") {
+        if (typeof(window.localStorage) !== 'undefined') {
           window.localStorage.setItem('pizza', JSON.stringify(this.pizza))}; this.pizzaServiceService.commandeOk = false; this.router.navigate(['./confirmation']); }
     );
   }
