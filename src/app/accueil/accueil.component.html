@@ -1,23 +1,32 @@
 <app-header></app-header>
 
-<div class="row mt-5"></div>
-
-<div class="container">
-
-<div class="col-md-7 offset-md-3" *ngIf="localStorage">
-  <h1>Votre dernière commande :</h1>
-  <p>{{pizza.toString()}}<p>
-  <a class="btn btn-primary" routerLink="/commander">Commander</a>
+<div class="spinner" *ngIf="isLoading">
 </div>
 
-  <div class="col-md-7 offset-md-3">
-      <h1>Bienvenue sur Pizza Mania</h1>
-      <div class="row mt-5"></div>
-      <p>Composer et commander votre pizza en cliquant sur le bouton ci-dessous !</p>
+<div class="container" *ngIf="!isLoading">
+  <div class="row mt-5"></div>
+
+  <div class="container">
+
+    <div class="col-md-7 offset-md-3" *ngIf="localStorage">
+      <h1>Votre dernière commande :</h1>
+      <p>{{pizza.toString()}}<p>
       <div class="row mt-4"></div>
-      <a class="btn btn-primary" routerLink="/composer">Composer</a>
-  </div>
-</div>
+      <a class="btn btn-primary" (click)="callPizzaService()">Commander</a>
+    </div>
 
+    <div class="row mt-5"></div>
+
+    <div class="col-md-7 offset-md-3">
+      <h1>Bienvenue sur Pizza Mania</h1>
+      <p>Vous pouvez consulter la carte ou composer votre propre pizza !</p>
+      <div class="row mt-4"></div>
+      <a class="btn btn-primary" routerLink="/carte" >Carte</a>
+      <a class="btn btn-primary" routerLink="/composer" >Composer</a>
+    </div>
+  </div>
+
+
+</div>
 
 <app-footer></app-footer>

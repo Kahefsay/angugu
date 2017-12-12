@@ -10,8 +10,8 @@ import {Pizza} from './pizza';
 export class PizzaServiceService {
 
   constructor(private http: HttpClient) { }
-  private urlGet = 'http://localhost:4300/pizzas';
-  private urlPost = 'http://localhost:4300/commanderPizza?';
+  private urlGet = 'http://192.168.0.18:4300/pizzas';
+  private urlPost = 'http://192.168.0.18:4300/commanderPizza?';
   public commandeOk = false;
 
   public getPizzas(): Observable<Pizza[]> {

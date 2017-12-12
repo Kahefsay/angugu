@@ -8,7 +8,7 @@ export class Pizza {
     this.ingredients = ingredients;
     this.pate = pate;
     this.base = base;
-    this.prix = 0;
+    this.prix = this.calculerPrix();
   }
 
   calculerPrix() {
@@ -16,7 +16,7 @@ export class Pizza {
     for (const ingredient of this.ingredients) {
       if (ingredient.value) { this.prix += ingredient.prix; }
     }
-    return this.prix += this.base.prix + this.pate.prix;
+    return this.prix += this.base.prix;
   }
 
   ingredientToString() {
@@ -29,13 +29,12 @@ export class Pizza {
   }
 
   toString() {
-    let res: string = "";
-    res = this.pate.nom + ", " + this.base.nom;
-    
+    let res = '';
+    res = this.pate.nom + ', ' + this.base.nom;
+
     for (const ingredient of this.ingredients) {
-      if (ingredient.value) {res += ", " + ingredient.nom};
+      if (ingredient.value) {res += ', ' + ingredient.nom; }
     }
-   
     return res;
   }
 
@@ -43,7 +42,6 @@ export class Pizza {
 
 export class Pate {
   nom: string;
-  prix: number;
 }
 
 export class Base {

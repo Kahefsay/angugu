@@ -16,8 +16,8 @@ export class PizzaformComponent implements OnInit {
   private isValid: boolean;
 
   pates: Pate[] = [
-    { nom: 'Fine', prix: 4},
-    { nom: 'Epaisse', prix: 4},
+    { nom: 'Fine'},
+    { nom: 'Epaisse'},
   ];
 
   bases: Base[] = [

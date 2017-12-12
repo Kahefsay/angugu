@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { RecapComponent } from './recap/recap.component';
+import { CarteComponent } from './carte/carte.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RecapComponent } from './recap/recap.component';
     HeaderComponent,
     FooterComponent,
     AccueilComponent,
-    RecapComponent
+    RecapComponent,
+    CarteComponent
   ],
   imports: [
     BrowserModule,
