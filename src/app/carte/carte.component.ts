@@ -11,14 +11,13 @@ import {Base, Ingredient, Pate, Pizza} from '../pizza';
 })
 export class CarteComponent implements OnInit {
   isLoading: boolean;
-  pizza: Pizza[];
+  pizza: Pizza[] = [];
 
   constructor(private pizzaServiceService: PizzaServiceService, private router: Router) { }
 
   ngOnInit() {
     this.isLoading = false;
     this.callPizzaService();
-    console.log(typeof this.pizza);
   }
 
   public callPizzaService() {
@@ -30,7 +29,7 @@ export class CarteComponent implements OnInit {
 
   public onSuccess(res: any) {
     this.isLoading = false;
-    this.pizza = new Array(res.length);
+    console.log(res);
 
     for (const p of res) {
       let pate: Pate;

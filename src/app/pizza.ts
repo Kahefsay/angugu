@@ -4,6 +4,7 @@ export class Pizza {
   ingredients: Ingredient[];
   prix: number;
 
+
   constructor(ingredients: Ingredient[], pate: Pate, base: Base) {
     this.ingredients = ingredients;
     this.pate = pate;
