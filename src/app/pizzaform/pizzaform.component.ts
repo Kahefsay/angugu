@@ -35,6 +35,10 @@ export class PizzaformComponent implements OnInit {
   ngOnInit() {
     this.pizza = new Pizza(this.ingredients, this.pates[0], this.bases[0]);
     this.isLoading = false;
+    this.pizzaServiceService.info("Component PizzaForm").subscribe(
+      (res) => {},
+      (error) =>{}
+    )
   }
 
   isValidForm() {
@@ -59,5 +63,8 @@ export class PizzaformComponent implements OnInit {
 
 
   public onSuccess(Pizza: any) { this.isLoading = false; console.log('success'); }
-  public onError(err: HttpErrorResponse) { this.isLoading = false; console.log(err); }
+  public onError(err: HttpErrorResponse) { this.isLoading = false; console.log(err);  this.pizzaServiceService.error("Erreur Commande").subscribe(
+    (res) => {},
+    (error) =>{}         
+  ); }
 }

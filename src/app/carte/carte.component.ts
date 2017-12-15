@@ -12,12 +12,18 @@ import {Base, Ingredient, Pate, Pizza} from '../pizza';
 export class CarteComponent implements OnInit {
   isLoading: boolean;
   pizza: Pizza[] = [];
+  sliderPrix: number;
 
   constructor(private pizzaServiceService: PizzaServiceService, private router: Router) { }
 
   ngOnInit() {
     this.isLoading = false;
+    this.sliderPrix = 10;
     this.callPizzaService();
+    this.pizzaServiceService.info("Component Carte").subscribe(
+      (res) => {},
+      (error) =>{},
+    )
   }
 
   public callPizzaService() {
@@ -26,6 +32,19 @@ export class CarteComponent implements OnInit {
       (res) => { this.onSuccess(res); },
       (error) => { this.onError(error); });
   }
+
+  public callPizzaServiceCommander(pizza: Pizza) {
+    this.isLoading = true;
+    this.pizzaServiceService.postPizza(pizza).subscribe(
+      (res) => { this.onSuccess(res); if (typeof(window.localStorage) !== "undefined") {
+        window.localStorage.setItem('pizza', JSON.stringify(pizza));
+      }; this.pizzaServiceService.commandeOk = true; this.router.navigate(['./confirmation']);},
+      (error) => { this.onError(error);
+        if (typeof(window.localStorage) !== 'undefined') {
+          window.localStorage.setItem('pizza', JSON.stringify(pizza))}; this.pizzaServiceService.commandeOk = false; this.router.navigate(['./confirmation']); }
+    );
+  }
+
 
   public onSuccess(res: any) {
     this.isLoading = false;
@@ -44,11 +63,19 @@ export class CarteComponent implements OnInit {
         { nom: 'Jambon', prix: 2, value: p.jambon},
         { nom: 'Magret', prix: 4, value: p.magret}
       ];
+      
+      let piz: Pizza = new Pizza(ingredients, pate, base);
+      piz.image = p.image;
+      piz.prix = p.prix;
 
-      this.pizza.push((new Pizza(ingredients, pate, base)));
+      this.pizza.push(piz);
     }
 
   }
 
-  public onError(err: HttpErrorResponse) { this.isLoading = false; console.log(err); }
+  public onSuccessCommander(Pizza: any) { this.isLoading = false; console.log('success'); }
+  public onError(err: HttpErrorResponse) { this.isLoading = false; this.pizzaServiceService.error("Erreur Commandec").subscribe(
+    (res) => {},
+    (error) =>{}         
+  );console.log(err); }
 }

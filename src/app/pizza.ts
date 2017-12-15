@@ -3,6 +3,7 @@ export class Pizza {
   base: Base;
   ingredients: Ingredient[];
   prix: number;
+  image: string;
 
 
   constructor(ingredients: Ingredient[], pate: Pate, base: Base) {
@@ -11,6 +12,8 @@ export class Pizza {
     this.base = base;
     this.prix = this.calculerPrix();
   }
+
+  
 
   calculerPrix() {
     this.prix = 0;

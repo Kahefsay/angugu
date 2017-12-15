@@ -15,5 +15,10 @@ export class RecapComponent implements OnInit {
 
   ngOnInit() {
     this.isOrdered = this.pizzaServiceService.commandeOk;
-  }
+    this.pizzaServiceService.info("Component Recap").subscribe(
+      (res) => {},
+      (error) =>{}
+    );
+    
+    }
 }

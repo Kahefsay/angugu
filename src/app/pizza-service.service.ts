@@ -12,6 +12,7 @@ export class PizzaServiceService {
   constructor(private http: HttpClient) { }
   private urlGet = 'http://localhost:4300/pizzas';
   private urlPost = 'http://localhost:4300/commanderPizza?';
+  private urlLog = 'http://localhost:4300/logger/'
   public commandeOk = false;
 
   public getPizzas(): Observable<Pizza[]> {
@@ -25,5 +26,18 @@ export class PizzaServiceService {
 
     return this.http.post(this.urlPost, '' ).catch((err: any) => Observable.throw(err || 'Erreur'));
   }
+
+  public info(message:string): Observable<Pizza[]>{
+
+    let urlLogInfo = this.urlLog + "info?" + "message=" + message; 
+    console.log(urlLogInfo);
+    return this.http.post(urlLogInfo, '').catch((err: any) => Observable.throw(err|| 'Erreur'))
+  }
+
+  public error(message: string): Observable<Pizza[]>{
+    let urlLogError = this.urlLog + "error?" + "message=" + message;
+    return this.http.post(urlLogError, '').catch((err: any) => Observable.throw(err|| 'Erreur'))
+  }
+  
 
 }

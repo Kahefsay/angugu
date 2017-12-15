@@ -24,6 +24,13 @@ export class AccueilComponent implements OnInit {
 
       this.pizza = new Pizza(temp.ingredients, temp.pate, temp.base);
      }
+    
+    this.pizzaServiceService.info("Component Accueil").subscribe(
+      (res) => {},
+      (error) =>{}
+
+    );
+
   }
 
   public callPizzaService() {
@@ -31,16 +38,24 @@ export class AccueilComponent implements OnInit {
     this.pizzaServiceService.postPizza(this.pizza).subscribe(
       (res) => { this.onSuccess(res); if (typeof(window.localStorage) !== 'undefined') {
         window.localStorage.setItem('pizza', JSON.stringify(this.pizza));
-      } this.pizzaServiceService.commandeOk = true; this.router.navigate(['./confirmation']); },
+      } 
+      this.pizzaServiceService.commandeOk = true; this.router.navigate(['./confirmation']); 
+      },
       (error) => { this.onError(error);
         if (typeof(window.localStorage) !== 'undefined') {
-          window.localStorage.setItem('pizza', JSON.stringify(this.pizza)); }
-this.pizzaServiceService.commandeOk = false; this.router.navigate(['./confirmation']); }
+          window.localStorage.setItem('pizza', JSON.stringify(this.pizza)); 
+        }
+        this.pizzaServiceService.commandeOk = false; this.router.navigate(['./confirmation']);
+          
+      }
     );
   }
 
 
   public onSuccess(Pizza: any) { this.isLoading = false; console.log('success'); }
-  public onError(err: HttpErrorResponse) { this.isLoading = false; console.log(err); }
+  public onError(err: HttpErrorResponse) { this.isLoading = false; this.pizzaServiceService.error("Erreur Commande").subscribe(
+    (res) => {},
+    (error) =>{}         
+  );console.log(err); }
 
 }
